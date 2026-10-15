@@ -6,8 +6,8 @@
   "description": "类 DeepSeek harness 前端 monorepo (pnpm workspaces + oxlint/oxfmt)",
   "type": "module",
   "scripts": {
-    "build": "pnpm -r build",
-    "dev": "pnpm -r --parallel dev",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "fmt": "oxfmt",
@@ -21,6 +21,7 @@
     "@types/node": "^24.10.1",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
+    "tsdown": "catalog:",
     "typescript": "catalog:"
   },
   "engines": {

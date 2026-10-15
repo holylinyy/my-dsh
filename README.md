@@ -8,18 +8,22 @@
 | --- | --- | --- |
 | 包管理 | **pnpm workspaces** | `pnpm-workspace.yaml`，含 `catalog` 统一版本 |
 | 语言 | **TypeScript (ESM)** | `tsconfig.base.json`，严格模式 |
-| 库构建 | **tsdown** | Rolldown 驱动，与 Oxc 同生态，输出 ESM + d.ts |
+| 库构建 | **tsdown（workspace 模式）** | Rolldown 驱动，与 Oxc 同生态，输出 ESM + d.ts |
 | Lint | **oxlint** | `.oxlintrc.json`（ESLint v8 兼容格式） |
 | Format | **oxfmt** | `.oxfmtrc.json`（Prettier 兼容 + import 排序） |
 
-> 不使用 Turborepo，任务直接用 `pnpm -r` 递归跑各包脚本。
+> 不使用 Turborepo。构建走 tsdown **workspace 模式**：根 `tsdown.config.ts` 声明 `workspace: true`
+> 与共享配置，从仓库根运行 `tsdown` 即可自动发现各子包、读取其 `tsdown.config.ts` 并合并共享项，一次构建全部。
+> 其余任务（typecheck 等）用 `pnpm -r` 递归跑各包脚本。
 
 ## 目录结构
 
 ```
 my-dsh/
 ├─ packages/
-│  └─ core/     @my-dsh/core    核心包（当前仅占位 src/index.ts，待你实现）
+│  └─ core/         @my-dsh/core  核心包（当前仅占位 src/index.ts，待你实现）
+│     └─ tsdown.config.ts        子包差异配置（entry/platform），共享项来自根
+├─ tsdown.config.ts   # workspace 模式入口：workspace:true + 共享配置
 ├─ pnpm-workspace.yaml
 ├─ tsconfig.base.json
 ├─ .oxlintrc.json
@@ -31,8 +35,8 @@ my-dsh/
 ```bash
 pnpm install
 
-pnpm build        # pnpm -r build，逐包构建
-pnpm dev          # pnpm -r --parallel dev
+pnpm build        # tsdown workspace 模式，一次构建全部子包
+pnpm dev          # tsdown --watch，监听全部子包源码
 pnpm lint         # oxlint（根级，覆盖全仓库）
 pnpm lint:fix     # oxlint --fix
 pnpm fmt          # oxfmt 写回
@@ -44,9 +48,9 @@ pnpm check        # lint + fmt:check + typecheck
 ## 添加新包
 
 1. 在 `packages/<name>/` 下建 `package.json`（命名 `@my-dsh/<name>`）、`tsdown.config.ts`、`tsconfig.json`（`extends` 根 `tsconfig.base.json`）。
-2. 依赖 workspace 包用 `"@my-dsh/core": "workspace:*"`。
-3. 需要统一版本时，把版本写进 `pnpm-workspace.yaml` 的 `catalog`，包内用 `"catalog:"`。
-4. 根脚本用 `pnpm -r`，新包会自动被纳入，无需改根配置。
+2. 子包 `tsdown.config.ts` 只写差异项（如 `entry`、`platform`）；`format/dts/sourcemap/clean/target` 由根 `tsdown.config.ts` 共享。
+3. 依赖 workspace 包用 `"@my-dsh/core": "workspace:*"`。需要统一版本时写进 `pnpm-workspace.yaml` 的 `catalog`，包内用 `"catalog:"`。
+4. 新包会被 tsdown workspace 自动发现（glob `**/package.json`），根 `build`/`dev` 无需改动；`typecheck` 等 `pnpm -r` 脚本同样自动纳入。
 
 ## 工具链说明
 
