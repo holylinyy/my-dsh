@@ -1,0 +1,42 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "oxc", "import", "promise", "node"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "pedantic": "off",
+    "style": "off",
+    "perf": "warn",
+    "nursery": "off"
+  },
+  "env": {
+    "node": true,
+    "es2024": true
+  },
+  "rules": {
+    "no-console": "warn",
+    "no-debugger": "error",
+    "eqeqeq": ["error", "always"],
+    "typescript/no-explicit-any": "warn",
+    "typescript/no-non-null-assertion": "off",
+    "unicorn/no-null": "off",
+    "import/no-cycle": "error"
+  },
+  "ignorePatterns": ["**/dist/**", "**/node_modules/**", "**/*.d.ts"],
+  "overrides": [
+    {
+      "files": ["**/*.{test,spec}.{ts,tsx}", "**/test/**"],
+      "env": { "node": true },
+      "rules": {
+        "no-console": "off"
+      }
+    },
+    {
+      "files": ["apps/**"],
+      "env": { "browser": true },
+      "rules": {
+        "import/no-unassigned-import": "off"
+      }
+    }
+  ]
+}

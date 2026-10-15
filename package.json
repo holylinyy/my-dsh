@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "my-dsh",
+  "version": "0.0.0",
+  "private": true,
+  "description": "类 DeepSeek harness 前端 monorepo (pnpm workspaces + Turborepo + oxlint/oxfmt)",
+  "type": "module",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "check": "pnpm run lint && pnpm run fmt:check && pnpm run typecheck && pnpm run test"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "tsdown": "catalog:",
+    "turbo": "^2.6.1",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "packageManager": "pnpm@10.33.0"
+}
