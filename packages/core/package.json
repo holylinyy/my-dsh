@@ -1,7 +1,7 @@
 {
   "name": "@my-dsh/core",
   "version": "0.0.0",
-  "description": "类 DeepSeek harness 核心：OpenAI 兼容 Chat Completions 客户端、流式 SSE、tool calls、重试与中断。",
+  "description": "类 DeepSeek harness 核心包。",
   "keywords": [
     "deepseek",
     "harness",
@@ -31,15 +31,10 @@
     "dev": "tsdown --watch",
     "lint": "oxlint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "clean": "rm -rf dist .turbo"
-  },
-  "dependencies": {
-    "zod": "catalog:"
+    "clean": "rm -rf dist"
   },
   "devDependencies": {
     "tsdown": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "typescript": "catalog:"
   }
 }

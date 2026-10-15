@@ -1,20 +1,11 @@
-export { DeepSeekClient, type DeepSeekClientOptions } from "./client";
-export { AbortError, ApiError, DshError, StreamParseError } from "./errors";
-export { computeBackoff, withRetry, type RetryOptions } from "./retry";
-export { parseSseStream, type SseEvent } from "./sse";
-export type {
-  ChatCompletion,
-  ChatCompletionChunk,
-  ChatCompletionChunkChoice,
-  ChatCompletionChunkDelta,
-  ChatCompletionChoice,
-  ChatMessage,
-  ChatRequest,
-  FetchLike,
-  FinishReason,
-  Role,
-  Tool,
-  ToolCall,
-  ToolChoice,
-  Usage,
-} from "./types";
+/**
+ * @my-dsh/core
+ * 类 DeepSeek harness 核心包的入口占位文件。
+ * 具体实现由你手动编写。
+ */
+
+export const VERSION = "0.0.0";
+
+export function ping(): string {
+  return "pong";
+}
