@@ -4,8 +4,8 @@
  * 具体实现由你手动编写。
  */
 
-export const VERSION = "0.0.0";
+export const VERSION = '0.0.0'
 
 export function ping(): string {
-  return "pong";
+  return 'pong1234'
 }

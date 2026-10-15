@@ -1,13 +1,14 @@
 packages:
-  - "packages/*"
+  - 'packages/*'
 
 # 统一 workspace 内包的默认依赖版本策略
 catalog:
-  typescript: ^5.9.3
-  tsdown: ^0.18.4
+  oxfmt: ^0.73.0
   # oxlint / oxfmt 由 Oxc 团队同步发版，尽量保持同一大版本
   oxlint: ^1.25.0
-  oxfmt: ^0.73.0
+  tsdown: ^0.22.2
+  typescript: ^6.0.3
+  vitest: ^5.0.4
 
 catalogMode: prefer
 
