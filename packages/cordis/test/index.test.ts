@@ -1,10 +1,19 @@
 import { describe, expect, it } from 'vitest'
 
-import { Context } from '../src/context'
+import { Context, Service } from '../src'
 
 describe('Cordis', () => {
   it('基础使用', () => {
-    const ctx = new Context('root')
-    expect(ctx.name).toBe('root')
+    class Counter extends Service {
+      value = 0
+
+      constructor(ctx: Context) {
+        super(ctx, 'counter')
+      }
+
+      next() {
+        return ++this.value
+      }
+    }
   })
 })

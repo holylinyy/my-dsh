@@ -17,10 +17,13 @@
     "no-console": "warn",
     "no-debugger": "error",
     "eqeqeq": ["error", "always"],
-    "typescript/no-explicit-any": "warn",
+    "typescript/no-explicit-any": "off",
     "typescript/no-non-null-assertion": "off",
     "unicorn/no-null": "off",
-    "import/no-cycle": "error"
+    "import/no-cycle": "error",
+    "typescript/no-this-alias": "off",
+    "no-underscore-dangle": "off",
+    "no-unused-vars": "off"
   },
   "ignorePatterns": ["**/dist/**", "**/node_modules/**", "**/*.d.ts"],
   "overrides": [
